@@ -23,6 +23,7 @@ def quote_scraper():
             print(next_link)
         else:
             break
+        #nothing
 
 
 quote_scraper()
