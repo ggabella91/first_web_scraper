@@ -12,8 +12,13 @@ def quote_scraper():
         soup = BeautifulSoup(response.text, "html.parser")
         quotes = soup.find_all("div", class_ = "quote")
         for quote in quotes:
+            author = quote.find("small", class_ = "author").text
+            author_bio_path = quote.find("a")["href"]
+            #print(author_bio_path)
+            bio = get_author_bio(author_bio_path)
+            
             text = quote.find("span", class_ = "text").text
-            print(text)
+            #print(text)
 
         next_page = soup.find("li", class_ = "next")
         
@@ -23,7 +28,15 @@ def quote_scraper():
             print(next_link)
         else:
             break
-        #nothing
+
+def get_author_bio(path):
+    url = "http://quotes.toscrape.com"
+    response = requests.get(url+path)
+    soup = BeautifulSoup(response.text, "html.parser")
+    born_date = soup.find("span", class_ = "author-born-date").text 
+    born_location = soup.find("span", class_ = "author-born-location").text
+    bio = born_date + " " + born_location
+    return bio
 
 
 quote_scraper()
