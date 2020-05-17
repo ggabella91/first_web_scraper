@@ -65,7 +65,7 @@ def main():
                     print(f"\nThe author's last initial is " + last_initial + "\n")
         
         if guesses == 0:
-            print("You are out of guesses. Sucks to suck!\n")
+            print("You are out of guesses. Sorry!\n")
             name = selection["name"]
             print(f"The author's name was {name}\n")
             print("Try again!\n\n")
